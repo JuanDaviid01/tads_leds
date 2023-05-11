@@ -67,20 +67,22 @@ public class ListDE {
         }
     }//reiniciar leds
 
-
     /*
     si hay datos...
-    si hay mas de 2 leds
+    si hay por lo menos 2 leds
         crear 2 ayudantes para recorrer la lista hacia arriba y hacia abajo
         buscar la mitad de la lista utilizando el size
-        usar un contaodr para llegar a la mitad
+        usar un contador para llegar a la mitad
         una vez este en la mitad decirle a los 2 ayudantes que se ubiquen en ese nodo
-            si es par decirle al ayudante 1 que se ubique en la mitady al ayudante 2 que se ubique uno adelante
-            si es impar decirle al ayudante 1 y 2 que se ubquien en la mitad+1
+            si es par decirle al ayudante 1 que se ubique en la mitad y al ayudante 2 que se pare uno adelante
+            si es impar decirle al ayudante 1 y 2 que se paren en la mitad+1
         hasta que lleguen a los extremos
-            que los prendadn, esperen un segundo y lo apaguen
+            que los prendan, esperen un segundo y los apaguen
             y le digo el temp1 que se pase al siguiente y al temp2 que pase al previo.
-       cuando esten en los extremos que los dejen prendidos
+       cuando esten en los extremos
+            los dejen prendidos
+       si no hay minimo  2
+            no se puede hacer el metodo entonces lo dejo prendido.
      */
     public void travelLedsOnOff() throws ListDEException, InterruptedException {
         if (head != null && size >= 2) {
@@ -110,9 +112,11 @@ public class ListDE {
                     temp1.getData().setState(false);
                     temp1.getData().setDateOff(LocalTime.now());
                     temp1 = temp1.getPrevious();
-                }
+                }//en los extremos
                 temp2.getData().setState(true);
+                temp2.getData().setDateOn(LocalTime.now());
                 temp1.getData().setState(true);
+                temp1.getData().setDateOn(LocalTime.now());
             } else {
                 while (cont != pos) {
                     temp1 = temp1.getNext();
@@ -135,15 +139,17 @@ public class ListDE {
                     temp1.getData().setState(false);
                     temp1.getData().setDateOff(LocalTime.now());
                     temp1 = temp1.getPrevious();
-                }
+                }//en los extremos
                 temp2.getData().setState(true);
+                temp2.getData().setDateOn(LocalTime.now());
                 temp1.getData().setState(true);
-            }
+                temp1.getData().setDateOn(LocalTime.now());
+            }//else impar
         } else {
-            head.getData().setState(true);
+            if (head != null) {
+                head.getData().setState(true);
+            }
             throw new ListDEException("No hay suficientes Datos para hacer el metodo");
         }
     }// recorrer desde el centro
-
-
 }//fin listDE
