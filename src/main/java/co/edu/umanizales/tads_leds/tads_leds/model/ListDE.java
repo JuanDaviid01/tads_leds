@@ -3,6 +3,7 @@ package co.edu.umanizales.tads_leds.tads_leds.model;
 import co.edu.umanizales.tads_leds.tads_leds.exception.ListDEException;
 import lombok.Data;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 @Data
@@ -81,34 +82,68 @@ public class ListDE {
             y le digo el temp1 que se pase al siguiente y al temp2 que pase al previo.
        cuando esten en los extremos que los dejen prendidos
      */
-    public void travelLedsOnOff() throws ListDEException {
+    public void travelLedsOnOff() throws ListDEException, InterruptedException {
         if (head != null && size >= 2) {
+            int pos = size / 2;
+            int cont = 0;
+            NodeDE temp1 = head;
+            NodeDE temp2 = head;
             if (size % 2 == 0) {
-                int pos = size / 2;
-                int cont = 0;
-                NodeDE temp1 = head;
-                NodeDE temp2 = head;
                 while (cont != pos) {
                     temp1 = temp1.getNext();
                     cont = cont + 1;
                 }
                 temp2 = temp1.getNext();
-            } else if (size % 2 != 0) {
-                int pos = size / 2;
-                int cont = 0;
-                NodeDE temp1 = head;
-                NodeDE temp2 = head;
+                //mitad
+                while (temp2.getNext() != null && temp1.getPrevious() != null) {
+                    //hacia abajo
+                    temp2.getData().setState(true);
+                    temp2.getData().setDateOn(LocalTime.now());
+                    Thread.sleep(1000);
+                    temp2.getData().setState(false);
+                    temp2.getData().setDateOff(LocalTime.now());
+                    temp2 = temp2.getNext();
+                    //hacia arriba
+                    temp1.getData().setState(true);
+                    temp1.getData().setDateOn(LocalTime.now());
+                    Thread.sleep(1000);
+                    temp1.getData().setState(false);
+                    temp1.getData().setDateOff(LocalTime.now());
+                    temp1 = temp1.getPrevious();
+                }
+                temp2.getData().setState(true);
+                temp1.getData().setState(true);
+            } else {
                 while (cont != pos) {
                     temp1 = temp1.getNext();
                     cont = cont + 1;
                 }
                 temp2 = temp1;
+                //mitad
+                while (temp2.getNext() != null && temp1.getPrevious() != null) {
+                    //hacia abajo
+                    temp2.getData().setState(true);
+                    temp2.getData().setDateOn(LocalTime.now());
+                    Thread.sleep(1000);
+                    temp2.getData().setState(false);
+                    temp2.getData().setDateOff(LocalTime.now());
+                    temp2 = temp2.getNext();
+                    //hacia arriba
+                    temp1.getData().setState(true);
+                    temp1.getData().setDateOn(LocalTime.now());
+                    Thread.sleep(1000);
+                    temp1.getData().setState(false);
+                    temp1.getData().setDateOff(LocalTime.now());
+                    temp1 = temp1.getPrevious();
+                }
+                temp2.getData().setState(true);
+                temp1.getData().setState(true);
             }
         } else {
             head.getData().setState(true);
             throw new ListDEException("No hay suficientes Datos para hacer el metodo");
         }
-    }
+    }// recorrer desde el centro
 
 
 }//fin listDE
