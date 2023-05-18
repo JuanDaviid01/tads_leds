@@ -16,9 +16,10 @@ public class ListDEService {
         leds = new ListDE();
     }
 
-    public void rebootLeds(){
+    public void rebootLeds() {
         leds.rebootLeds();
     }
+
     public void travelLedsOnOff() throws ListDEException, InterruptedException {
         leds.travelLedsOnOff();
     }

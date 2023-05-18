@@ -35,13 +35,13 @@ public class ListDEController {
 
     @GetMapping(path = "/reboot_leds")
     public ResponseEntity<ResponseDTO> rebootLeds() {
-        listDEService.getLeds().rebootLeds();
+        listDEService.rebootLeds();
         return new ResponseEntity<>(new ResponseDTO(200, "se reinciaron los leds", null), HttpStatus.OK);
     }
 
     @GetMapping(path = "/travel_on_off_leds")
     public ResponseEntity<ResponseDTO> travelOnOffLeds() throws ListDEException, InterruptedException {
-        listDEService.getLeds().travelLedsOnOff();
+        listDEService.travelLedsOnOff();
         return new ResponseEntity<>(new ResponseDTO(200, "se prendieron y apgaron exitosamente", null), HttpStatus.OK);
     }
 
