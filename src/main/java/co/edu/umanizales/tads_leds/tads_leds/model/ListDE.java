@@ -62,6 +62,8 @@ public class ListDE {
             NodeDE temp = head;
             while (temp != null) {
                 temp.getData().setState(false);
+                temp.getData().setDateOff(null);
+                temp.getData().setDateOn(null);
                 temp = temp.getNext();
             }
         }
