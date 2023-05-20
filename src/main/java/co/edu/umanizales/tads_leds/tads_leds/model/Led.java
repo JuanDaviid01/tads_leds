@@ -11,6 +11,7 @@ public class Led {
 
     private int id;
     private boolean state;
+    private String color;
     private LocalTime dateOn;
     private LocalTime dateOff;
 }

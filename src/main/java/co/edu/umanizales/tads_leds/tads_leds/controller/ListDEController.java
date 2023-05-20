@@ -23,13 +23,13 @@ public class ListDEController {
 
     @PostMapping
     public ResponseEntity<ResponseDTO> addLed(@RequestBody LedDTO ledDTO) throws ListDEException {
-        listDEService.getLeds().add(new Led(ledDTO.getId(), false, null, null));
+        listDEService.getLeds().add(new Led(ledDTO.getId(), false, "White", null, null));
         return new ResponseEntity<>(new ResponseDTO(200, "Se ha adicionado el led", null), HttpStatus.OK);
     }
 
     @PostMapping(path = "/add_to_start")
     public ResponseEntity<ResponseDTO> addLedToStart(@RequestBody LedDTO ledDTO) {
-        listDEService.getLeds().addToStart(new Led(ledDTO.getId(), false, null, null));
+        listDEService.getLeds().addToStart(new Led(ledDTO.getId(), false, "White", null, null));
         return new ResponseEntity<>(new ResponseDTO(200, "Se ha adicionado el led", null), HttpStatus.OK);
     }
 
@@ -45,4 +45,9 @@ public class ListDEController {
         return new ResponseEntity<>(new ResponseDTO(200, "se prendieron y apgaron exitosamente", null), HttpStatus.OK);
     }
 
+    @GetMapping(path = "/travel_on_off_leds_colors")
+    public ResponseEntity<ResponseDTO> travelOnOffLedsWithColors() throws ListDEException, InterruptedException {
+        listDEService.travelLedsOnOffWithColors();
+        return new ResponseEntity<>(new ResponseDTO(200, "solo nacional lokas", null), HttpStatus.OK);
+    }
 }//fin controller

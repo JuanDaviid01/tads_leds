@@ -24,4 +24,8 @@ public class ListDEService {
         leds.travelLedsOnOff();
     }
 
+    public void travelLedsOnOffWithColors() throws ListDEException, InterruptedException {
+        leds.travelLedsOnOffWithColors();
+    }
+
 }
